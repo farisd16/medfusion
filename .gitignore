@@ -1,6 +1,7 @@
 /**/*
 !/**/
 /venv/
+.venv
 !*.ipynb
 !*.gitignore
 !*.md

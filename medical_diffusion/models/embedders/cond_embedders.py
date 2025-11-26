@@ -1,10 +1,10 @@
-
 import torch.nn as nn
-import torch 
+import torch
 from monai.networks.layers.utils import get_act_layer
 
+
 class LabelEmbedder(nn.Module):
-    def __init__(self, emb_dim=32, num_classes=2, act_name=("SWISH", {})):
+    def __init__(self, emb_dim=32, num_classes=7, act_name=("SWISH", {})):
         super().__init__()
         self.emb_dim = emb_dim
         self.embedding = nn.Embedding(num_classes, emb_dim)
@@ -17,11 +17,8 @@ class LabelEmbedder(nn.Module):
         # )
 
     def forward(self, condition):
-        c = self.embedding(condition) #[B,] -> [B, C]
+        c = self.embedding(condition)  # [B,] -> [B, C]
         # c = self.emb_net(c)
         # c = self.emb_net(condition[:,None].float())
         # c = (2*condition-1)[:, None].expand(-1, self.emb_dim).type(torch.float32)
         return c
-
-
-
