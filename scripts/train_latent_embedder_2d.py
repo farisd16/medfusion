@@ -74,7 +74,7 @@ if __name__ == "__main__":
         # json_dir="./medical_diffusion/data/datasets/BTXRD/Annotations",
         # split_path="./medical_diffusion/data/datasets/data-split.json",
         # path_root="./medical_diffusion/data/datasets/BTXRD/final_patched_BTXRD",
-        json_dir=Path(args.btxrd_path) / "Annotations",
+        json_dir=Path(args.btxrd_path) / "BTXRD" / "Annotations",
         split_path=args.data_split_path,
         path_root=Path(args.btxrd_path) / "final_patched_BTXRD",
         split_mode="train",
