@@ -168,7 +168,7 @@ if __name__ == "__main__":
     checkpointing = ModelCheckpoint(
         dirpath=str(path_run_dir),  # dirpath
         monitor=to_monitor,
-        every_n_train_steps=save_and_sample_every,
+        every_n_train_steps=save_and_sample_every,  # Save every 50 steps
         save_last=True,
         save_top_k=5,
         mode=min_max,
@@ -176,19 +176,12 @@ if __name__ == "__main__":
     trainer = Trainer(
         accelerator="gpu",
         devices=[0],
-        # precision=16,
-        # amp_backend='apex',
-        # amp_level='O2',
-        # gradient_clip_val=0.5,
         default_root_dir=str(path_run_dir),
         callbacks=[checkpointing],
-        # callbacks=[checkpointing, early_stopping],
         enable_checkpointing=True,
-        check_val_every_n_epoch=1,
-        log_every_n_steps=save_and_sample_every,
-        # auto_lr_find=False,
-        # limit_train_batches=1000,
-        limit_val_batches=0,  # 0 = disable validation - Note: Early Stopping no longer available
+        check_val_every_n_epoch=None,  # Disable epoch-based validation
+        log_every_n_steps=save_and_sample_every,  # Log every 50 steps
+        limit_val_batches=0,  # Disable validation
         min_epochs=100,
         max_epochs=1001,
         num_sanity_val_steps=2,

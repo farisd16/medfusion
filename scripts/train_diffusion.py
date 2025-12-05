@@ -153,6 +153,9 @@ if __name__ == "__main__":
     latent_embedder = VAE
     # latent_embedder_checkpoint = "./runs/vae_2025_11_25_170041/last.ckpt"
     latent_embedder_checkpoint = args.vae_checkpoint_path
+    assert Path(latent_embedder_checkpoint).exists(), (
+        "Latent embedder checkpoint not found!"
+    )
 
     # ------------ Initialize Pipeline ------------
     pipeline = DiffusionPipeline(

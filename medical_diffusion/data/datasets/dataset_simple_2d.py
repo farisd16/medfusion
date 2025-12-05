@@ -49,7 +49,7 @@ class SimpleDataset2D(data.Dataset):
                     # Normalize(), # [0, 1.0]
                     # T.ConvertImageDtype(torch.float),
                     T.Normalize(
-                        mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                        mean=0.5, std=0.5
                     ),  # WARNING: mean and std are not the target values but rather the values to subtract and divide by: [0, 1] -> [0-0.5, 1-0.5]/0.5 -> [-1, 1]
                 ]
             )
@@ -284,6 +284,8 @@ class BTXRD_Dataset(SimpleDataset2D):
             json_path = os.path.join(self.json_dir, json_name)
 
             if not os.path.exists(json_path):
+                print(json_path)
+                print(f"ERROR: No json for {fname}")
                 continue
 
             with open(json_path, "r") as f:

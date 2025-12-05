@@ -54,7 +54,7 @@ pil2torch = (
 ds_real = BTXRD_Dataset(
     json_dir="./medical_diffusion/data/datasets/BTXRD/Annotations",
     split_path="./medical_diffusion/data/datasets/data-split.json",
-    path_root="./medical_diffusion/data/datasets/BTXRD/final_patched_BTXRD",
+    path_root="./medical_diffusion/data/datasets/final_patched_BTXRD",
     split_mode="test",
     image_resize=(224, 224),
 )
@@ -112,7 +112,7 @@ for real_batch in tqdm(dm_real):
     imgs_real_batch = real_batch["source"].to(device)
 
     imgs_real_batch = tF.normalize(
-        imgs_real_batch / 255, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+        imgs_real_batch / 255, mean=0.5, std=0.5
     )  # [0, 255] -> [-1, 1]
     with torch.no_grad():
         imgs_fake_batch = model(imgs_real_batch)[0].clamp(-1, 1)
